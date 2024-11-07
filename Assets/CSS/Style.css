@@ -1,0 +1,443 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a{
+	text-decoration: none;
+}
+
+img{
+	max-width: 100%;
+	height: auto;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+
+/*css resset end*/
+
+/*------------navbar-------------*/
+
+/*------------footer-------------*/
+
+/*------------KV-------------*/
+.KV{
+	background-color: #F6F7FA;
+	margin-top: 80px;
+    width: 100%;
+    height: 720px; 
+}
+
+.slogan{
+    max-width: 1200px;
+    padding: 64px 240px;
+    margin:  0 auto;
+}
+
+.line{
+    width: 100%;
+    border: 1px solid #939393;
+}
+
+.cta-line{
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+}
+
+.detail{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.corner{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.progress{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.block p{
+    font-size: 18px;
+}
+
+.block{
+    padding: 16px;
+    border: 1px solid black;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* 填寫資料區 */
+
+.caption{
+    margin-bottom: 16px;
+}
+.caption h3{
+    font-weight: 700;
+}
+/* Input */
+
+label{
+    font-weight: 600;
+}
+
+.form-block{
+    display: flex;
+    flex-direction: column;
+}
+
+.input-container {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+}
+
+/* ToggleToken */
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+}
+
+.radio-container {
+    display: flex;
+    align-items: center;
+}
+
+.radio-input {
+    display: none; /* 隱藏原生 radio */
+}
+
+.radio-option{
+display: flex;
+flex-direction: row;
+gap: 8px;
+flex-wrap: wrap;
+}
+
+.radio-label {
+    cursor: pointer;
+    padding: 8px 16px;
+    background-color: #F6F7FA;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+    color: #737373;
+}
+
+.radio-input:checked + .radio-label {
+    background-color: #0053AC;
+    color: white;
+    border-color: #0053AC;
+}
+
+/* Textarea */
+.text-container {
+    position: relative;
+    width: 100%; /* 可根據需要調整寬度 */
+}
+
+textarea {
+    width: 100%;
+    height: auto; /* 自動調整高度 */
+    min-height: 40px; /* 預設高度為兩行字高 */
+    resize: vertical; /* 只允許垂直調整 */
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+textarea::placeholder {
+    color: #aaa;
+}
+
+
+/* checkbox */
+.agree-block{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 48px;
+}
+
+.agree-check{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+#agreeCheckbox{
+    width: 24px;
+}
+/* 確認送出 */
+.next{
+    font-size: 18px;
+    color: white;
+    background-color: #0053AC;
+    padding: 16px 24px;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.next:hover{
+    background-color: #024389;
+}
+
+.next:disabled{
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+
+
+/* 背景遮罩 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 同意事項 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    max-width: 540px;
+    max-height: 75vh;
+    overflow-y: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* 彈窗位於遮罩上層 */
+}
+
+/* 關閉按鈕 */
+.close-btn {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    float: right;
+}
+.modal-content {
+    background-color: white;
+    width: 100%;
+    max-height: 75vh;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.modal-header {
+    background-color: #f1f1f1;
+    padding: 24px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+.modal-body {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    width: 100%;
+    padding: 24px;
+}
+/* 固定的 footer */
+.modal-footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+    padding: 16px;
+}
+/* 禁止背景滾動 */
+.modal-open {
+    overflow: hidden;
+}
+
+/* 開啟彈窗的按鈕 */
+#openModalBtn {
+    color: #024389;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+}
+
+.confirm-btn {
+    background-color: #0053AC;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    width: 100%;
+    font-size: 20px;
+}
+
+.confirm-btn:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+
+
+
+
+/* -------------------------------------結果頁------------------------------------ */
+
+.IMG{
+    margin-top: 144px;
+    margin-bottom: -8px;
+}
+.result-img{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.result-img img{
+    width: 56px;
+}
+
+.card-header{
+    padding: 16px 24px;
+    background-color: #ddd;
+    text-align: center;
+    border-radius: 24px 24px 0px 0px;
+}
+.card-body{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 40px;
+    padding: 0px 40px;
+}
+
+.label-text{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.label-block{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.helptext{
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+.result-CTA{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    margin: 42px 0px 40px 0px;
+}
+.primary-btn,.secondary-btn{
+    background-color:#0053AC ;
+    color: white;
+    padding: 16px 24px;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 12px;
+}
+
+.secondary-btn{
+    background-color: rgba(255, 255, 255, 0);
+    color: #0053AC;
+    border:1px solid #0053AC;
+}
+
+.result-info{
+    background-color: white;
+    border-radius: 24px;
+}

@@ -1,0 +1,97 @@
+.display1{
+    font-family: "Noto Sans TC", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 40px;
+    color: white;
+}
+h1{
+    font-family: "Noto Sans TC", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 48px;
+}
+
+h2{
+    font-family: "Noto Sans TC", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-size: 32px;
+    font-style: normal;
+}
+h3{
+    font-family: "Noto Sans TC", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-size: 24px;
+    font-style: normal;
+}
+h4{
+    font-family: "Noto Sans TC", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-size: 20px;
+    font-style: normal;
+}
+h5{
+    font-family: "Noto Sans TC", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-size: 18px;
+    font-style: normal;
+}
+.body1{
+    font-family: "Noto Sans TC", sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+}
+.body2{
+    font-family: "Noto Sans TC", sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+}
+.body3{
+    font-family: "Noto Sans TC", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+}
+
+link, a{
+    font-family: "Noto Sans TC", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+
+@media (max-width: 767px) {
+    .display1{
+        font-size: 40px;
+    }
+
+    h1{
+        font-size: 32px;
+    }
+    h2{
+        font-size: 28px;
+    }
+    h3{
+        font-size: 24px;
+    }
+}
+
+.intro,.train,.carrer h2{
+    text-align: center;
+}
+

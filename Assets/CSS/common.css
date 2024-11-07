@@ -1,0 +1,180 @@
+
+body{
+	font-family: "Noto Sans TC", sans-serif;
+	background: #eeeeee;
+	line-height: 1.5;
+}
+button{
+    border: none;
+    cursor: pointer
+}
+/* Color */
+
+.black{
+    color: black;
+}
+.white{
+    color: white;
+}
+.orange{
+    color: #EB6100;
+}
+.blue{
+    color: #0053AC;
+}
+
+/* Spacing */
+
+.container{
+	max-width: 1200px;
+	padding: 0px 240px;
+	margin: 0 auto;
+}
+
+.wrapper{
+	max-width: 1200px;
+	padding: 48px 240px;
+	margin: 0 auto;
+}
+
+@media (max-width: 767px) {
+	.wrapper {
+		width: 100%;
+		padding: 96px 24px;
+	}
+    .container {
+        width: 100%;
+        padding: 0 24px;
+      }
+  }
+
+
+
+/* header */
+  .navbar{
+	width: 100%;
+	position: fixed;
+	top: 0;
+	align-items: center;
+	background:white ;
+	z-index: 99;
+}
+
+
+.navbar .container{
+	display: flex;
+	height: 80px;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.logo a {
+	color: #fff;
+	font-size: 20px;
+	font-weight: bolder;
+	text-indent: 101%;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    background-image: url(../IMG/YuantaLogo.svg);
+    width: 165px;
+	background-repeat: no-repeat;
+}
+
+
+/* ContainerBlock */
+
+
+.title{
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	gap: 24px;
+}
+
+
+
+
+
+/* GoToTop */
+.back-to-top {
+    position: fixed; /* 固定位置 */
+    bottom: 250px;    /* 距離底部 20px */
+    right: 54px;     /* 距離右側 20px */
+    background-color: #232323c6; /* 背景顏色 */
+    color: white;    /* 文字顏色 */
+    border: none;    /* 取消邊框 */
+    border-radius: 100%; /* 圓形按鈕 */
+    width: 48px;     /* 寬度 */
+    height: 48px;    /* 高度 */
+    display: flex;   /* 讓按鈕內的內容居中 */
+    align-items: center; /* 垂直置中 */
+    justify-content: center; /* 水平置中 */
+    transition: background-color 0.3s; /* 背景顏色過渡效果 */
+    opacity: 0; /* 初始隱藏 */
+    visibility: hidden; /* 初始隱藏 */
+    z-index: 100; /* 確保在最上層 */
+}
+
+.back-to-top.show {
+    opacity: 1; /* 滾動到一定距離後顯示 */
+    visibility: visible; /* 滾動到一定距離後顯示 */
+}
+
+.back-to-top:hover {
+    background-color: black; /* 滑鼠懸停時改變背景顏色 */
+}
+
+
+/* ContactUS */
+.contactus{
+	background-color: #0053AC;
+	padding: 64px 24px;
+}
+.section{
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	justify-content: center;
+}
+.section p{
+	font-size: 36px;
+	font-weight: 900;
+}
+
+.fb{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 24px;
+}
+.fb p{
+	font-size: 20px;
+	font-weight: 500;
+}
+.fb img{
+	width:172px
+}
+
+
+/* Footer */
+
+.footer{
+	background-color: black;
+}
+.about{
+	max-width: 1200px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 0 auto;
+	padding: 60px 40px 40px 40px;
+}
+.web{
+	text-align: center;
+	padding: 32px;
+	border-top: 1px solid white;
+}
+
