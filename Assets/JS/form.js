@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const teamRadios = document.querySelectorAll("input[type='radio'][name='teamToggle']");
     let hasOpenedModal = false;
 
-    // 初始化：禁用提交按钮
-    submitBtn.disabled = true;
+    // 初始化：submit按鈕保持為可點擊狀態
+    submitBtn.disabled = false;
 
     // 開啟彈窗
     function openModal() {
@@ -91,8 +91,55 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // 檢查文本框是否為空
         inputs.forEach(input => {
+            const errorMessage = input.nextElementSibling; // 找到錯誤訊息元素
+            let errorText = '';
+
+            // 清除之前的錯誤樣式
+            input.style.borderColor = ''; // 清除邊框顏色
+            input.classList.remove('error'); // 移除錯誤類
+
             if (input.value.trim() === "") {
                 allFilled = false;
+                // 根據欄位名稱或ID顯示不同的錯誤訊息
+                switch (input.id) {
+                    case 'name':
+                        errorText = '請輸入完整的姓名';
+                        break;
+                    case 'school':
+                        errorText = '請輸入學校名稱';
+                        break;  
+                    case 'deparment':
+                        errorText = '請輸入系所名稱';
+                        break;   
+                    case 'phone':
+                        errorText = '請輸入有效的電話號碼';
+                        break;   
+                    case 'email':
+                        errorText = '請輸入有效的電子郵件地址';
+                        break;
+                    default:
+                        errorText = '請輸入完整資訊';
+                }
+
+                // 顯示錯誤訊息
+                if (!errorMessage) {
+                    const errorSpan = document.createElement('span');
+                    errorSpan.style.color = 'red';
+                    errorSpan.style.fontSize = '16px';
+                    errorSpan.style.marginTop = '4px';
+                    errorSpan.textContent = errorText;
+                    input.parentElement.appendChild(errorSpan); // 在欄位下方顯示錯誤訊息
+                }
+
+                // 為欄位邊框加上紅色邊框
+                input.style.borderColor = 'red';
+                input.classList.add('error'); // 添加錯誤類別以便做進一步樣式調整
+            } else {
+                // 移除錯誤訊息
+                if (errorMessage) {
+                    errorMessage.remove();
+                }
+                input.style.borderColor = ''; // 清除紅色邊框
             }
         });
 
@@ -109,11 +156,59 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // 檢查 checkbox 是否已勾選
+        const errorMessageCheckbox = document.getElementById('checkboxErrorMessage');
         if (!agreeCheckbox.checked) {
             allFilled = false;
+
+            // 顯示錯誤訊息在 checkbox 上方
+            if (!errorMessageCheckbox) {
+                const errorSpan = document.createElement('span');
+                errorSpan.id = 'checkboxErrorMessage';
+                errorSpan.style.color = 'red';
+                errorSpan.style.fontSize = '16px';
+                errorSpan.style.marginBottom = '4px'; // 使文字與 checkbox 有間距
+                errorSpan.textContent = '請先閱讀並同意事項聲明';
+                agreeCheckbox.parentElement.insertBefore(errorSpan, agreeCheckbox); // 顯示在 checkbox 上方
+            }
+        } else {
+            // 移除錯誤訊息
+            if (errorMessageCheckbox) {
+                errorMessageCheckbox.remove();
+            }
         }
 
         // 根據所有必填項的狀態，啟用或禁用提交按鈕
         submitBtn.disabled = !allFilled;
+        return allFilled;
     }
+
+    // 監聽提交按鈕，當按鈕可點擊時，跳轉到 result.html
+    submitBtn.addEventListener('click', function(event) {
+        // 檢查表單是否完成
+        const allFilled = checkFormCompletion();
+
+        if (allFilled) {
+            window.location.href = "result.html"; // 跳轉到結果頁
+        } else {
+            // 如果有欄位未填寫，顯示錯誤提示並停止跳轉
+            event.preventDefault();  // 防止跳轉
+            inputs.forEach(input => {
+                // 如果某個欄位未填寫，顯示紅色錯誤訊息
+                if (input.value.trim() === "") {
+                    let errorMessage = input.nextElementSibling;
+                    if (!errorMessage) {
+                        errorMessage = document.createElement('span');
+                        errorMessage.style.color = 'red';
+                        errorMessage.style.fontSize = '16px';
+                        errorMessage.style.marginTop = '4px';
+                        errorMessage.textContent = '請輸入完整資訊';
+                        input.parentElement.appendChild(errorMessage);
+                    }
+
+                    // 為欄位邊框加上紅色邊框
+                    input.style.borderColor = 'red';
+                }
+            });
+        }
+    });
 });
