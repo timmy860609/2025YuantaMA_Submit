@@ -207,6 +207,7 @@ flex-wrap: wrap;
 .text-container {
     position: relative;
     width: 100%; /* 可根據需要調整寬度 */
+    margin-bottom: 48px;
 }
 
 textarea {
@@ -231,7 +232,6 @@ textarea::placeholder {
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-top: 48px;
 }
 
 .agree-check{

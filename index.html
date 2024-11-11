@@ -160,7 +160,7 @@
             
                 <div class="input-container">
                     <label for="school">學校</label>
-                    <input type="text" id="school" placeholder="沒台/清/交/成/政別填">
+                    <input type="text" id="school" placeholder="請輸入你的學校">
                 </div>
             
                 <div class="input-container">
@@ -171,7 +171,7 @@
                 <div class="radio-group">
                     <label>學歷</label>
                     <div class="radio-option">
-                        <div class="radio-container">
+                        <div class="radio-container" >
                             <input type="radio" name="styleToggle" id="style1" class="radio-input" checked>
                             <label for="style1" class="radio-label">大學</label>
                         </div>
@@ -328,7 +328,21 @@
 
     <script src="Assets/JS/form.js"></script>
     <script src="Assets/JS/all.js"></script>
+    <script>
+        // 在 index.html 的 submit 按鈕點擊事件中儲存表單數據
+        const formData = {
+            name: document.getElementById('name').value,
+            school: document.getElementById('school').value,
+            deparment: document.getElementById('deparment').value,
+            phone: document.getElementById('phone').value,
+            email: document.getElementById('email').value,
+            styleToggle: document.querySelector('input[name="styleToggle"]:checked')?.value,
+            teamToggle: document.querySelector('input[name="teamToggle"]:checked')?.value,
+        };
 
+        // 儲存表單數據到 localStorage
+        localStorage.setItem('formData', JSON.stringify(formData));
+    </script>
 
 
  <!-- 寫到checkbox報錯文字、toggletoken要把submit屬性拿掉 -->

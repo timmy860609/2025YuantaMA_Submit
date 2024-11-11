@@ -82,15 +82,27 @@
                     <div class="label-block">
                         <div class="label-text">
                             <p class="body3">姓名</p>
-                            <h5>元O大</h5>
+                            <h5 id="nameResult"></h5>
+                        </div>
+                        <div class="label-text">
+                            <p class="body3">學校</p>
+                            <h5 id="schoolResult"></h5>
+                        </div>
+                        <div class="label-text">
+                            <p class="body3">科系</p>
+                            <h5 id="deparmentResult"></h5>
+                        </div>
+                        <div class="label-text">
+                            <p class="body3">學歷</p>
+                            <h5 id="styleResult"></h5>
                         </div>
                         <div class="label-text">
                             <p class="body3">手機號碼</p>
-                            <h5>0973***938</h5>
+                            <h5 id="phoneResult"></h5>
                         </div>
                         <div class="label-text">
                             <p class="body3">電子郵件</p>
-                            <h5>yuanta@gmail.com</h5>
+                            <h5 id="emailResult"></h5>
                         </div>
                     </div>
                     <div class="line"></div>
@@ -115,11 +127,11 @@
                     <div class="label-block">
                         <div class="label-text">
                             <p class="body3">最想瞭解</p>
-                            <h5>數位金融組</h5>
+                            <h5 id="teamResult"></h5>
                         </div>
-                        <div class="label-text">
-                            <p class="body3">最想知道</p>
-                            <h5>幾點上班、幾點放飯、幾點下班</h5>
+                        <div class="label-text" id="textareaResult" style="display: flex; visibility: hidden;">
+                            <p class="body3">想在說明會獲得什麼資訊？</p>
+                            <h5 id="textareaResultText"></h5>
                         </div>
                     </div>
                     <div class="result-CTA">
@@ -128,9 +140,7 @@
                     </div>
                 </div>
             </div>
-            
         </div>
-       
     </div>
     
     <!-- Footer -->
@@ -152,4 +162,6 @@
             <span class="white">建議瀏覽器版本：Chrome、Safari、FireFox、Edge以上最新版本</span>
         </div>
     </div>
+
+    <script src="Assets/JS/result.js"></script>
 </body>

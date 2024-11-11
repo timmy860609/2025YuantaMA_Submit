@@ -10,9 +10,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputs = document.querySelectorAll("input[type='text'], input[type='email'], input[type='tel']");
     const radios = document.querySelectorAll("input[type='radio'][name='styleToggle']");
     const teamRadios = document.querySelectorAll("input[type='radio'][name='teamToggle']");
+    const agreeBlock = document.querySelector('.agree-block');
     let hasOpenedModal = false;
 
-    // 初始化：submit按鈕保持為可點擊狀態
+    // 初始化：submit 按鈕設為可點擊
     submitBtn.disabled = false;
 
     // 開啟彈窗
@@ -34,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
     confirmBtn.addEventListener('click', () => {
         agreeCheckbox.checked = true;
         closeModal();
-        checkFormCompletion(); // 更新提交按钮状态
+        
     });
 
     // 監聽滾動事件，啟用確認按鈕
@@ -58,11 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
         closeModal();
     });
 
-    // 確保 modalOverlay 點擊不會關閉彈窗或改變 checkbox 狀態
-    modalOverlay.addEventListener('click', function(event) {
-        event.stopPropagation();
-    });
-
     // 如果使用者第一次勾選 checkbox 時尚未開啟過彈窗，則強制開啟彈窗
     agreeCheckbox.addEventListener('change', function() {
         if (!hasOpenedModal && agreeCheckbox.checked) {
@@ -74,33 +70,55 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 監聽所有必填文本框的變化
     inputs.forEach(input => {
-        input.addEventListener("input", checkFormCompletion);
+        input.addEventListener("input", function() {
+            removeErrorMessage(input); // 移除錯誤訊息
+        });
     });
 
     // 監聽單選框的變化
     radios.forEach(radio => {
-        radio.addEventListener("change", checkFormCompletion);
+        radio.addEventListener("change", function() {
+            // 不進行即時檢查
+        });
     });
+
     teamRadios.forEach(radio => {
-        radio.addEventListener("change", checkFormCompletion);
+        radio.addEventListener("change", function() {
+            // 不進行即時檢查
+        });
     });
+
+    function removeErrorMessage(input) {
+        const errorMessage = input.nextElementSibling;
+        if (errorMessage) {
+            errorMessage.remove();
+        }
+        input.style.borderColor = ''; 
+        input.classList.remove('error');
+        
+        checkFormCompletion(); // 移除錯誤訊息後，重新檢查表單狀態
+    }
+    
+
 
     // 檢查所有必填項是否已填寫
     function checkFormCompletion() {
         let allFilled = true;
+        let firstErrorField = null; // 儲存第一個錯誤欄位
 
         // 檢查文本框是否為空
         inputs.forEach(input => {
-            const errorMessage = input.nextElementSibling; // 找到錯誤訊息元素
+            const errorMessage = input.nextElementSibling;
             let errorText = '';
 
-            // 清除之前的錯誤樣式
-            input.style.borderColor = ''; // 清除邊框顏色
-            input.classList.remove('error'); // 移除錯誤類
+            input.style.borderColor = ''; 
+            input.classList.remove('error'); 
 
             if (input.value.trim() === "") {
                 allFilled = false;
-                // 根據欄位名稱或ID顯示不同的錯誤訊息
+                if (!firstErrorField) {
+                    firstErrorField = input; // 記錄第一個錯誤欄位
+                }
                 switch (input.id) {
                     case 'name':
                         errorText = '請輸入完整的姓名';
@@ -121,94 +139,130 @@ document.addEventListener('DOMContentLoaded', function() {
                         errorText = '請輸入完整資訊';
                 }
 
-                // 顯示錯誤訊息
-                if (!errorMessage) {
-                    const errorSpan = document.createElement('span');
-                    errorSpan.style.color = 'red';
-                    errorSpan.style.fontSize = '16px';
-                    errorSpan.style.marginTop = '4px';
-                    errorSpan.textContent = errorText;
-                    input.parentElement.appendChild(errorSpan); // 在欄位下方顯示錯誤訊息
-                }
-
-                // 為欄位邊框加上紅色邊框
-                input.style.borderColor = 'red';
-                input.classList.add('error'); // 添加錯誤類別以便做進一步樣式調整
-            } else {
-                // 移除錯誤訊息
-                if (errorMessage) {
-                    errorMessage.remove();
-                }
-                input.style.borderColor = ''; // 清除紅色邊框
+                showErrorMessage(input, errorText); // 顯示錯誤訊息
             }
         });
 
-        // 檢查學歷單選框是否至少選擇一項
+        // 檢查其他欄位 (如中文姓名、電話、電子郵件格式)
+        checkSpecificFields();
+
+        // 檢查 radio 是否選擇
         const styleSelected = Array.from(radios).some(radio => radio.checked);
         if (!styleSelected) {
             allFilled = false;
         }
 
-        // 檢查組別單選框是否至少選擇一項
         const teamSelected = Array.from(teamRadios).some(radio => radio.checked);
         if (!teamSelected) {
             allFilled = false;
         }
 
-        // 檢查 checkbox 是否已勾選
+        // 檢查 checkbox 是否勾選
         const errorMessageCheckbox = document.getElementById('checkboxErrorMessage');
         if (!agreeCheckbox.checked) {
             allFilled = false;
 
-            // 顯示錯誤訊息在 checkbox 上方
             if (!errorMessageCheckbox) {
                 const errorSpan = document.createElement('span');
                 errorSpan.id = 'checkboxErrorMessage';
                 errorSpan.style.color = 'red';
                 errorSpan.style.fontSize = '16px';
-                errorSpan.style.marginBottom = '4px'; // 使文字與 checkbox 有間距
-                errorSpan.textContent = '請先閱讀並同意事項聲明';
-                agreeCheckbox.parentElement.insertBefore(errorSpan, agreeCheckbox); // 顯示在 checkbox 上方
+                errorSpan.style.textAlign = 'center';
+                errorSpan.style.display = 'block';
+                errorSpan.style.marginBottom = '4px';
+                errorSpan.textContent = '請先閱讀並同意聲明事項';
+                agreeBlock.parentElement.insertBefore(errorSpan, agreeBlock);
             }
         } else {
-            // 移除錯誤訊息
             if (errorMessageCheckbox) {
                 errorMessageCheckbox.remove();
             }
         }
 
-        // 根據所有必填項的狀態，啟用或禁用提交按鈕
         submitBtn.disabled = !allFilled;
+
+        if (!allFilled && firstErrorField) {
+            // 如果有錯誤，將畫面捲動到第一個錯誤欄位
+            firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
         return allFilled;
     }
 
-    // 監聽提交按鈕，當按鈕可點擊時，跳轉到 result.html
+    // 顯示錯誤訊息
+    function showErrorMessage(input, message) {
+        const errorMessage = input.nextElementSibling;
+        if (!errorMessage) {
+            const errorSpan = document.createElement('span');
+            errorSpan.style.color = 'red';
+            errorSpan.style.fontSize = '16px';
+            errorSpan.style.marginTop = '4px';
+            errorSpan.textContent = message;
+            input.parentElement.appendChild(errorSpan);
+        }
+        input.style.borderColor = 'red';
+    }
+
+    // 移除錯誤訊息
+    function removeErrorMessage(input) {
+        const errorMessage = input.nextElementSibling;
+        if (errorMessage) {
+            errorMessage.remove();
+        }
+        input.style.borderColor = ''; 
+        input.classList.remove('error');
+    }
+
+    // 檢查特殊欄位（如姓名、電話、電子郵件等）
+    function checkSpecificFields() {
+        // 檢查 name 欄位是否為中文
+        const name = document.getElementById('name').value.trim();
+        const namePattern = /^[\u4e00-\u9fa5]{2,20}$/; // 中文名 (2到20個字)
+        if (name && !namePattern.test(name)) {
+            allFilled = false;
+            showErrorMessage(document.getElementById('name'), '請輸入有效的中文姓名');
+        }
+
+        // 檢查 phone 欄位是否以 09 開頭且為 10 位數字
+        const phone = document.getElementById('phone').value.trim();
+        const phonePattern = /^09\d{8}$/; // 09 開頭 10 位數字
+        if (phone && !phonePattern.test(phone)) {
+            allFilled = false;
+            showErrorMessage(document.getElementById('phone'), '請輸入有效的手機號碼');
+        }
+
+        // 檢查 email 欄位是否符合正確格式
+        const email = document.getElementById('email').value.trim();
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (email && !emailPattern.test(email)) {
+            allFilled = false;
+            showErrorMessage(document.getElementById('email'), '請輸入有效的電子郵件地址');
+        }
+    }
+
+    // 註冊提交按鈕的事件處理
     submitBtn.addEventListener('click', function(event) {
-        // 檢查表單是否完成
-        const allFilled = checkFormCompletion();
+        if (checkFormCompletion()) {
+            event.preventDefault();
+            const selectedTeam = document.querySelector('input[name="teamToggle"]:checked');
+            const selectedStyle = document.querySelector('input[name="styleToggle"]:checked');
+            
+            const selectedTeamText = selectedTeam ? selectedTeam.value : '';
+            const selectedStyleText = selectedStyle ? selectedStyle.nextElementSibling.textContent : '';  
 
-        if (allFilled) {
-            window.location.href = "result.html"; // 跳轉到結果頁
-        } else {
-            // 如果有欄位未填寫，顯示錯誤提示並停止跳轉
-            event.preventDefault();  // 防止跳轉
-            inputs.forEach(input => {
-                // 如果某個欄位未填寫，顯示紅色錯誤訊息
-                if (input.value.trim() === "") {
-                    let errorMessage = input.nextElementSibling;
-                    if (!errorMessage) {
-                        errorMessage = document.createElement('span');
-                        errorMessage.style.color = 'red';
-                        errorMessage.style.fontSize = '16px';
-                        errorMessage.style.marginTop = '4px';
-                        errorMessage.textContent = '請輸入完整資訊';
-                        input.parentElement.appendChild(errorMessage);
-                    }
-
-                    // 為欄位邊框加上紅色邊框
-                    input.style.borderColor = 'red';
-                }
-            });
+            // 儲存表單資料
+            localStorage.setItem('formData', JSON.stringify({
+                name: document.getElementById('name').value,
+                school: document.getElementById('school').value,
+                department: document.getElementById('deparment').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                selectedTeam: selectedTeamText, // 儲存選中的 team 文字
+                selectedStyle: selectedStyleText // 儲存選中的 style 文字
+            }));
+            window.location.href = "result.html";
         }
     });
 });
+
+
