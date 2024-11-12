@@ -136,6 +136,18 @@ img{
     background-color: white;
 }
 
+@media (max-width: 767px) {
+    .corner{
+        flex-direction: column;
+    }
+    .corner img{
+        width: 16px;
+        rotate: 90deg;
+        margin: 0 auto;
+    }
+}
+
+
 /* 填寫資料區 */
 
 .caption{
