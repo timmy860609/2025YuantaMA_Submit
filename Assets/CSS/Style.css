@@ -81,11 +81,23 @@ img{
     padding: 64px 240px;
     margin:  0 auto;
 }
+@media (max-width: 1023px) {
+    .slogan{
+        padding: 64px 120px;
+    }
+}
+@media (max-width: 767px) {
+    .slogan{
+        padding: 32px 40px;
+    }
+}
 
+/*------------KV-------------*/
 .line{
     width: 100%;
     border: 1px solid #939393;
 }
+/*------------KV-------------*/
 
 .cta-line{
     display: flex;
@@ -153,13 +165,13 @@ label {
 input {
     width: 100%;
     padding: 12px;
-    border: none;
+    border: 1px solid #ffffff00;
     border-radius: 4px;
     font-size: 18px;
 }
 
 input.error{
-    border: 1px solid red;
+    border: 1px solid #DE0606;
 }
 
 
@@ -291,7 +303,7 @@ textarea::placeholder {
     overflow-y: auto;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000; /* 彈窗位於遮罩上層 */
+    z-index: 1000; 
 }
 
 /* 關閉按鈕 */
@@ -367,7 +379,18 @@ textarea::placeholder {
     background-color: #ddd;
     cursor: not-allowed;
 }
+.modal-body h5{
+    margin-top: 12px;
+}
+.modal-body p{
+    margin-top: 8px;
+}
 
+@media (max-width: 767px) {
+    .modal{
+        width: 90vw;
+    }
+}
 
 
 

@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
             errorSpan.textContent = message;
             input.parentElement.appendChild(errorSpan);
         }
-        input.style.borderColor = 'red';
+        input.style.borderColor = '#DE0606';
     }
 
     // 檢查特殊欄位（如姓名、電話、電子郵件等）
