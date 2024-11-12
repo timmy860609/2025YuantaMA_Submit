@@ -114,7 +114,8 @@ img{
 .corner{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    gap: 4px;
+    width: 100%;
 }
 
 .progress{
@@ -132,6 +133,7 @@ img{
     border: 1px solid black;
     border-radius: 8px;
     text-align: center;
+    background-color: white;
 }
 
 /* 填寫資料區 */
