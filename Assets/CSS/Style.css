@@ -288,7 +288,10 @@ textarea::placeholder {
     background-color: #ddd;
     cursor: not-allowed;
 }
-
+@media (max-width: 767px) {
+    
+    
+}
 
 
 /* 背景遮罩 */

@@ -35,6 +35,10 @@ document.addEventListener('DOMContentLoaded', function() {
     confirmBtn.addEventListener('click', () => {
         agreeCheckbox.checked = true;  // 勾選 checkbox
         agreeCheckbox.disabled = false;  // 啟用 checkbox
+        const errorMessageCheckbox = document.getElementById('checkboxErrorMessage');
+        if (errorMessageCheckbox) {
+        errorMessageCheckbox.remove();
+    }
         closeModal();  // 關閉彈窗
     });
 
