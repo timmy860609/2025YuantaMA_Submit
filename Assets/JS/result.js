@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const formData = JSON.parse(localStorage.getItem('formData'));
-
+    console.log(formData);
     if (formData) {
         // 顯示表單資料
         document.getElementById('nameResult').textContent = formData.name || '';
@@ -10,16 +10,16 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('emailResult').textContent = formData.email || '';
         document.getElementById('styleResult').textContent = formData.selectedStyle || '';
         document.getElementById('teamResult').textContent = formData.selectedTeam || '';
-        
-        // 顯示 textarea 資料
-        const textareaResult = document.getElementById('textareaResult');
-        const textareaResultText = document.getElementById('textareaResultText');
-
-        if (formData.message) {
-            textareaResultText.textContent = formData.message;  // 顯示儲存的 message
-            textareaResult.style.visibility = 'visible';  // 顯示 textareaResult 容器
-        } else {
-            textareaResult.style.visibility = 'hidden';  // 如果沒有資料則隱藏容器
+        document.getElementById('textareaResult').style.visibility = 'visible';
+        document.querySelector('#textareaResult h5').textContent = formData.textarea;
         }
-    }
+        const textareaContent = formData.textarea || '';  // 取得textarea的內容
+        if (textareaContent.trim() !== "") {
+            // 如果textarea有內容，顯示並填入內容
+            document.getElementById('textareaResult').style.visibility = 'visible';
+            document.querySelector('#textareaResult h5').textContent = textareaContent;
+        } else {
+            // 如果textarea沒有內容，隱藏
+            document.getElementById('textareaResult').style.visibility = 'hidden';
+        }
 });
